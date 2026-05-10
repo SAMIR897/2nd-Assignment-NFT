@@ -1,5 +1,9 @@
 # 🚀 Turbin3 Pre-Builder: Week 2 Assignment
 
+<p align="center">
+  <img src="nft_image.png" alt="John Wick Turbin3 NFT" width="300" />
+</p>
+
 Hey there! Welcome to my submission for the Turbin3 Week 2 Assignment. 
 
 For this week, we were tasked with diving into the Solana ecosystem to mint our own SPL Token and a Metaplex Core NFT from scratch. Rather than relying on outdated boilerplate, I decided to build these scripts from the ground up using modern tools like the **Metaplex Umi framework** and the **Irys Uploader** for decentralized storage.
