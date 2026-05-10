@@ -12,7 +12,7 @@ import {
 import * as fs from 'fs';
 import * as os from 'os';
 
-// Load keypair from default solana config
+// Grab our wallet keypair from the local Solana CLI setup
 const keypairPath = `${os.homedir()}/.config/solana/id.json`;
 const secretKey = new Uint8Array(JSON.parse(fs.readFileSync(keypairPath, 'utf8')));
 const payer = Keypair.fromSecretKey(secretKey);
@@ -22,7 +22,7 @@ const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
 async function main() {
     console.log(`Wallet address: ${payer.publicKey.toBase58()}`);
 
-    // 1. Create a new SPL Token Mint
+    // First up, let's spin up a brand new Token Mint!
     console.log('Creating a new SPL Token Mint...');
     const mint = await createMint(
         connection,
@@ -33,7 +33,7 @@ async function main() {
     );
     console.log(`Mint address: ${mint.toBase58()}`);
 
-    // 2. Create an Associated Token Account (ATA) for the wallet
+    // Now we need an Associated Token Account (ATA) so our wallet can actually hold these new tokens.
     console.log('Creating Associated Token Account...');
     const tokenAccount = await getOrCreateAssociatedTokenAccount(
         connection,
@@ -43,9 +43,9 @@ async function main() {
     );
     console.log(`Token Account address: ${tokenAccount.address.toBase58()}`);
 
-    // 3. Mint some tokens to the ATA
+    // Time to print some money! Let's mint 1,000 tokens to our new account.
     console.log('Minting 1000 tokens to the account...');
-    const amountToMint = 1000 * (10 ** 6); // 1000 tokens with 6 decimals
+    const amountToMint = 1000 * (10 ** 6);
     const signature = await mintTo(
         connection,
         payer,

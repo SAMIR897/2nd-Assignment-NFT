@@ -11,11 +11,11 @@ import * as fs from 'fs';
 import * as os from 'os';
 import * as path from 'path';
 
-// Load keypair from default solana config
+// Grab our wallet keypair from the local Solana CLI setup
 const keypairPath = `${os.homedir()}/.config/solana/id.json`;
 const secretKey = new Uint8Array(JSON.parse(fs.readFileSync(keypairPath, 'utf8')));
 
-// Setup Umi
+// Fire up the Umi framework and point it at the Devnet
 const umi = createUmi('https://api.devnet.solana.com')
     .use(mplCore())
     .use(irysUploader({ address: "https://devnet.irys.xyz" })); // Use devnet irys
@@ -23,25 +23,25 @@ const umi = createUmi('https://api.devnet.solana.com')
 const myKeypair = umi.eddsa.createKeypairFromSecretKey(secretKey);
 const myKeypairSigner = createSignerFromKeypair(umi, myKeypair);
 
-// Use the keypair as the identity for Umi
+// Tell Umi to use our wallet for signing transactions
 umi.use(keypairIdentity(myKeypairSigner));
 
 async function main() {
     console.log(`Wallet address: ${myKeypair.publicKey}`);
 
-    // 1. Upload Image
+    // Step 1: Upload the raw image file to Irys (Arweave)
     console.log('Uploading Image to Irys...');
     const imageFile = fs.readFileSync(path.join(__dirname, '../nft_image.png'));
     const umiImageFile = createGenericFile(imageFile, 'nft_image.png', {
         tags: [{ name: 'Content-Type', value: 'image/png' }],
     });
 
-    // Upload the image file
+    // Push the file up to the decentralized storage
     const imageUriRaw = await umi.uploader.upload([umiImageFile]);
     const imageUri = imageUriRaw[0].replace("arweave.net", "devnet.irys.xyz");
     console.log(`Image uploaded successfully: ${imageUri}`);
 
-    // 2. Upload Metadata
+    // Step 2: Create and upload the metadata JSON
     console.log('Uploading Metadata...');
     const metadata = {
         name: 'John Wick Turbin3 NFT',
@@ -67,7 +67,7 @@ async function main() {
     const metadataUri = metadataUriRaw.replace("arweave.net", "devnet.irys.xyz");
     console.log(`Metadata uploaded successfully: ${metadataUri}`);
 
-    // 3. Mint the NFT
+    // Step 3: Let's mint this beautiful Core NFT!
     console.log('Minting the Core NFT...');
     const assetSigner = generateSigner(umi);
     const tx = await create(umi, {
