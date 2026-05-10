@@ -2,6 +2,17 @@
 
 This repository contains scripts to mint an SPL Token and a Metaplex Core NFT using the new Umi framework. 
 
+## Submission Proof
+
+Here are the details of the successfully executed scripts on Devnet:
+
+- **SPL Token Mint Address**: `38ZZ2iTtt9tgWJHTLZaB3MguWoefMQsQPA6oEoUUswmN`
+- **SPL Mint Transaction**: [Explorer Link](https://explorer.solana.com/tx/62AuyY1TZdgXMQYtiHqqyhyi38c8L7sCEkGc6a2WYzL75FYTxgH9aCZCTH9fZJCdCbJVKgFEo4Nmhje9QbLP2nZ6?cluster=devnet)
+- **MPL Core NFT Asset ID**: `35nFbb3VYoAtzRqjup6sHFZfmYk3UQNQvQN7yiD9XBUT`
+- **MPL Core NFT Explorer**: [Metaplex Core Explorer Link](https://core.metaplex.com/explorer/35nFbb3VYoAtzRqjup6sHFZfmYk3UQNQvQN7yiD9XBUT?env=devnet)
+- **NFT Image (Irys Arweave)**: [View Image](https://devnet.irys.xyz/HkpoEtymhfLFwSesXTnTwZpgP5v3yVzTEzveKrA1W6P9)
+
+
 ## Requirements
 
 - Node.js installed
