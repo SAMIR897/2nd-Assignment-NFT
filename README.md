@@ -1,50 +1,63 @@
-# Turbin3 Week 2 Assignment
+# 🚀 Turbin3 Pre-Builder: Week 2 Assignment
 
-This repository contains scripts to mint an SPL Token and a Metaplex Core NFT using the new Umi framework. 
+Hey there! Welcome to my submission for the Turbin3 Week 2 Assignment. 
 
-## Submission Proof
+For this week, we were tasked with diving into the Solana ecosystem to mint our own SPL Token and a Metaplex Core NFT from scratch. Rather than relying on outdated boilerplate, I decided to build these scripts from the ground up using modern tools like the **Metaplex Umi framework** and the **Irys Uploader** for decentralized storage.
 
-Here are the details of the successfully executed scripts on Devnet:
+Here is a breakdown of what I built and the on-chain proof that everything works!
 
-- **SPL Token Mint Address**: `38ZZ2iTtt9tgWJHTLZaB3MguWoefMQsQPA6oEoUUswmN`
-- **SPL Mint Transaction**: [Explorer Link](https://explorer.solana.com/tx/62AuyY1TZdgXMQYtiHqqyhyi38c8L7sCEkGc6a2WYzL75FYTxgH9aCZCTH9fZJCdCbJVKgFEo4Nmhje9QbLP2nZ6?cluster=devnet)
-- **MPL Core NFT Asset ID**: `35nFbb3VYoAtzRqjup6sHFZfmYk3UQNQvQN7yiD9XBUT`
-- **MPL Core NFT Explorer**: [Metaplex Core Explorer Link](https://core.metaplex.com/explorer/35nFbb3VYoAtzRqjup6sHFZfmYk3UQNQvQN7yiD9XBUT?env=devnet)
-- **NFT Image (Irys Arweave)**: [View Image](https://devnet.irys.xyz/HkpoEtymhfLFwSesXTnTwZpgP5v3yVzTEzveKrA1W6P9)
+---
 
+## 🏆 Submission Proof (Devnet)
 
-## Requirements
+I've successfully executed both scripts on the Solana Devnet. You can verify the on-chain data using the links below:
 
-- Node.js installed
-- A valid Solana keypair file located at `~/.config/solana/id.json` with some Devnet SOL.
+### 1. The SPL Token
+- **Mint Address**: `38ZZ2iTtt9tgWJHTLZaB3MguWoefMQsQPA6oEoUUswmN`
+- **Transaction Hash**: [View on Solana Explorer](https://explorer.solana.com/tx/62AuyY1TZdgXMQYtiHqqyhyi38c8L7sCEkGc6a2WYzL75FYTxgH9aCZCTH9fZJCdCbJVKgFEo4Nmhje9QbLP2nZ6?cluster=devnet)
 
-## Setup
+### 2. The Metaplex Core NFT (John Wick Edition)
+For the NFT, I uploaded a custom John Wick image to Arweave using Irys and attached an on-chain `Attributes` plugin!
+- **Asset ID**: `35nFbb3VYoAtzRqjup6sHFZfmYk3UQNQvQN7yiD9XBUT`
+- **Metaplex Explorer**: [View the NFT details here](https://core.metaplex.com/explorer/35nFbb3VYoAtzRqjup6sHFZfmYk3UQNQvQN7yiD9XBUT?env=devnet)
+- **Arweave Image**: [View Raw Image](https://devnet.irys.xyz/HkpoEtymhfLFwSesXTnTwZpgP5v3yVzTEzveKrA1W6P9)
 
-1. Clone the repository and navigate to this directory.
-2. Install the dependencies:
+---
+
+## 🛠️ How It Was Built
+
+I split the assignment into two clean, easy-to-read TypeScript files located in the `src/` directory.
+
+### SPL Token Minting (`src/mint_spl.ts`)
+This script uses `@solana/web3.js` and `@solana/spl-token`. When run, it connects to Devnet, creates a brand new token mint, spins up an Associated Token Account (ATA) for my wallet, and mints 1,000 tokens into it. Simple and effective!
+
+### Metaplex Core NFT (`src/mint_nft_core.ts`)
+This is where the heavy lifting happens. Instead of using the older Metaplex SDKs, I used **Umi** and `@metaplex-foundation/mpl-core`. 
+1. It reads a local image (`nft_image.png`).
+2. It uses the `@metaplex-foundation/umi-uploader-irys` plugin to push the image and metadata to decentralized storage.
+3. It mints the NFT and utilizes the **Attributes Core Plugin** to bake custom traits (like `Course: Turbin3`) directly into the asset on-chain.
+
+---
+
+## 💻 Running it Yourself
+
+If you want to clone this and run it yourself, you'll need Node.js and a valid Solana keypair with some Devnet SOL at `~/.config/solana/id.json`.
+
+1. **Install the dependencies:**
    ```bash
    npm install
    ```
 
-## Running the Scripts
+2. **Mint the SPL Token:**
+   ```bash
+   npm run mint-spl
+   ```
 
-### 1. Mint an SPL Token
+3. **Mint the Core NFT:**
+   *(Make sure you drop an image named `nft_image.png` in the root folder first!)*
+   ```bash
+   npm run mint-nft
+   ```
 
-This script will connect to Solana Devnet, create a new Token Mint, create an Associated Token Account (ATA) for your wallet, and mint 1,000 tokens to it.
-
-```bash
-npm run mint-spl
-```
-
-### 2. Mint a Metaplex Core NFT
-
-This script uses the `@metaplex-foundation/mpl-core` library alongside the Umi framework to mint a new Core NFT. It also utilizes the `Attributes` Core Plugin to attach custom traits (e.g., `Course: Turbin3`, `Week: 2`) directly to the asset.
-
-```bash
-npm run mint-nft
-```
-
-## Details
-
-- **SPL Token Minting**: Uses `@solana/spl-token` and `@solana/web3.js` to create the mint and ATA.
-- **MPL Core NFT**: Uses `@metaplex-foundation/umi` and `@metaplex-foundation/mpl-core`. The `Attributes` plugin is passed during the `create` instruction to assign on-chain traits to the NFT.
+---
+*"I have served. I will be of service."*
