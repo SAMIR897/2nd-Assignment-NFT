@@ -63,5 +63,13 @@ If you want to clone this and run it yourself, you'll need Node.js and a valid S
    npm run mint-nft
    ```
 
+### Rust Integration Tests
+I have also written full Rust integration tests for the SPL Token and MPL Core NFT flows using `solana-program-test` to verify everything works securely in a simulated Bankrun environment!
+
+Run the integration tests using Cargo:
+```bash
+cargo test
+```
+
 ---
 *"I have served. I will be of service."*

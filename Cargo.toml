@@ -1,0 +1,15 @@
+[package]
+name = "assignment2"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+
+[dev-dependencies]
+solana-program = "=1.18.23"
+solana-sdk = "=1.18.23"
+solana-program-test = "=1.18.23"
+spl-token = "=4.0.0"
+spl-associated-token-account = "3.0.1"
+mpl-core = "0.8.1"
+tokio = { version = "1.0", features = ["full"] }
